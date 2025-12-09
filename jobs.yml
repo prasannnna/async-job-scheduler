@@ -3,14 +3,20 @@ jobs:
     command: "python -c \"print('fetching data')\""
     interval: 10
 
+  - name: clean_data
+    command: "python -c \"print('cleaning data')\""
+    interval: 12
+    depends_on:
+      - fetch_data
+
   - name: transform_data
     command: "python -c \"print('transforming data')\""
     interval: 15
     depends_on:
-      - fetch_data
+      - clean_data
 
   - name: report
-    command: "python -c \"print('report ready')\""
+    command: "python -c \"exit(1)\""
     interval: 20
     depends_on:
       - transform_data
