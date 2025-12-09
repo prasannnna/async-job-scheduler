@@ -1,0 +1,16 @@
+jobs:
+  - name: fetch_data
+    command: "python -c \"print('fetching data')\""
+    interval: 10
+
+  - name: transform_data
+    command: "python -c \"print('transforming data')\""
+    interval: 15
+    depends_on:
+      - fetch_data
+
+  - name: report
+    command: "python -c \"print('report ready')\""
+    interval: 20
+    depends_on:
+      - transform_data
